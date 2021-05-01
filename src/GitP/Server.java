@@ -2,9 +2,12 @@ package GitP;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 
 public class Server {
+
     public static void main(String[] args) {
 
         try {
@@ -27,4 +30,5 @@ public class Server {
             e.printStackTrace();
         }
     }
+
 }

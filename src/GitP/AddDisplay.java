@@ -3,8 +3,9 @@ package GitP;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class AddDisplay extends JPanel {
+public class AddDisplay extends JPanel implements Serializable {
     private MainFrame parent;
     private JLabel lbl1;
     private JLabel lbl2;
@@ -72,13 +73,11 @@ public class AddDisplay extends JPanel {
                 String surname = textField2.getText();
                 int age = Integer.parseInt(textField3.getText());
                 student = new Students(null,name, surname,age);
+                Client.SendStud(student);
 
-                try{
-                    PackageData pd = new PackageData("ADD_STUDENT",student);
-                    ConnectDisplay.outputStream.writeObject(pd);
-
-                }catch (Exception ex){ex.printStackTrace();}
-
+                textField1.setText("");
+                textField2.setText("");
+                textField3.setText("");
             }
 
         });

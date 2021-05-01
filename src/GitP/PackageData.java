@@ -1,11 +1,12 @@
 package GitP;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PackageData {
+public class PackageData implements Serializable {
     private String operationType;
-    private static ArrayList<Students> students;
-    private static Students student;
+    private  ArrayList<Students> students = new ArrayList<>();
+    private  Students student;
 
     public PackageData() {
     }
@@ -27,15 +28,20 @@ public class PackageData {
         return students;
     }
 
-    public void setStudents(Students student) {
+    public  void setStudents(Students student) {
         this.students.add(student);
     }
 
-    public Students getStudent() {
+    public  Students getStudent() {
         return student;
     }
 
-    public void setStudent(Students student) {
+    public  void setStudent(Students student) {
         this.student = student;
+    }
+
+    @Override
+    public String toString() {
+        return "operationType=' " + operationType;
     }
 }
