@@ -3,12 +3,17 @@ package GitP;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class MainDisplay extends JPanel {
+public class MainDisplay extends JPanel implements Serializable {
     MainFrame parent;
     JButton addS;
     JButton list;
     JButton exit;
+
+
+    PackageData pd = new PackageData();
 
     public MainDisplay(MainFrame parent) {
         this.parent = parent;
@@ -32,7 +37,13 @@ public class MainDisplay extends JPanel {
         list.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
+                Client.SendList();
+                Client.studentss =  Client.takeStudents();
                 parent.ShowListDisplay();
+                parent.listDisplay.generateTable(Client.studentss);
+
             }
         });
 

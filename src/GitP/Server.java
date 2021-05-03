@@ -1,12 +1,13 @@
 package GitP;
 
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 
-public class Server {
+public class Server implements Serializable {
 
     public static void main(String[] args) {
 

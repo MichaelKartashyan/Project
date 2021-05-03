@@ -5,8 +5,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class ListDisplay extends JPanel {
+public class ListDisplay extends JPanel implements Serializable {
     private MainFrame parent;
 
 
@@ -29,6 +31,7 @@ public class ListDisplay extends JPanel {
         table = new JTable();
         table.setFont(new Font("Calibri", Font.PLAIN, 12));
         table.setRowHeight(30);
+        add(table);
 
 
         scrollPane = new JScrollPane(table);
@@ -49,14 +52,15 @@ public class ListDisplay extends JPanel {
             }
         });
     }
-    public void generateTable(Students[] students){
+    public void generateTable(ArrayList<Students> students){
 
-        Object Students[][] = new Object[students.length][3];
+        Object Students[][] = new Object[students.size()][3];
 
-        for(int i =0;i<students.length;i++){
-            Students[i][0] = students[i].getName();
-            Students[i][1] = students[i].getSurname();
-            Students[i][2] = students[i].getAge();
+        for(int i =0;i<students.size();i++){
+            System.out.println(students.get(i).toString());
+            Students[i][0] = students.get(i).getName();
+            Students[i][1] = students.get(i).getSurname();
+            Students[i][2] = students.get(i).getAge();
         }
 
         DefaultTableModel model = new DefaultTableModel(Students, header);

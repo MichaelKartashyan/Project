@@ -1,12 +1,15 @@
 package GitP;
 
 import javax.swing.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Serializable {
 
     MainDisplay mainDisplay;
     AddDisplay addDisplay;
     ListDisplay listDisplay;
+
     public MainFrame(){
         setSize(500,500);
         setLayout(null);
@@ -26,6 +29,7 @@ public class MainFrame extends JFrame {
         listDisplay = new ListDisplay(this);
         listDisplay.setVisible(false);
         add(listDisplay);
+
 
 
     }

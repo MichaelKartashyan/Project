@@ -11,6 +11,10 @@ public class PackageData implements Serializable {
     public PackageData() {
     }
 
+    public PackageData(String operationType) {
+        this.operationType = operationType;
+    }
+
     public PackageData(String operationType, Students student) {
         this.operationType = operationType;
         this.student = student;
@@ -30,6 +34,10 @@ public class PackageData implements Serializable {
 
     public  void setStudents(Students student) {
         this.students.add(student);
+    }
+
+    public  void setAllStudents(ArrayList<Students> student) {
+        this.students = student;
     }
 
     public  Students getStudent() {

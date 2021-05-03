@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 
@@ -33,10 +34,16 @@ public class ClientHandler extends Thread implements Serializable {
                     }
                 }else if(data.getOperationType().equals("LIST_STUDENTS")){
                     PackageData response = new PackageData();
-                    outputStream.writeObject(response);
+                    ArrayList<Students> students = new ArrayList<>();
+
+                    if(connect()){
+
+                        students = getAllStudents();
+                        System.out.println("GetAllStudents ok");
+                        response.setAllStudents(students);
+                        outputStream.writeObject(response);
+                    }
                 }
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +51,25 @@ public class ClientHandler extends Thread implements Serializable {
     }
 
 
+    public static ArrayList<Students> getAllStudents(){
+        ArrayList<Students> students = new ArrayList<>();
+        try{
+            PreparedStatement st = connection.prepareStatement("select * from students");
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()){
+                Long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                int age = resultSet.getInt("age");
+                students.add(new Students(id,name,surname,age));
+            }
+            st.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return students;
 
+    }
     public static boolean connect(){
         boolean check = false;
         try{
